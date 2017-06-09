@@ -6,5 +6,5 @@ We develop a pragmatic algorithm to automatically identify potential outliers in
 
 # Origin of the Project Name
 
-The project name __Aakozi__ is the Ojibwe word for the animate intransitive verb "s/he is sick". See [link](http://ojibwe.lib.umn.edu). This name seems appropriate for a program used to identify potental outliers.
+The project name __Aakozi__ is the Ojibwe word for the animate intransitive verb "s/he is sick". See [http://ojibwe.lib.umn.edu](http://ojibwe.lib.umn.edu/search?utf8=%E2%9C%93&q=aakozi&commit=Search&type=ojibwe). This name seems appropriate for a program used to identify potental outliers.
 
