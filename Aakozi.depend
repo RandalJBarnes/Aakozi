@@ -1,0 +1,118 @@
+# depslib dependency file v1.0
+1497018290 source:c:\users\randal\google drive\projects\aakozi\src\aakozi_engine.cpp
+	"aakozi_engine.h"
+	"special_functions.h"
+	"matrix.h"
+	"linear_systems.h"
+	<numeric>
+	<math.h>
+	<iomanip>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\aakozi_engine.h
+	<vector>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\special_functions.h
+	<iostream>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\matrix.h
+	<iostream>
+	<vector>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\linear_systems.h
+	"matrix.h"
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\src\linear_systems.cpp
+	"linear_systems.h"
+	<cassert>
+	<cmath>
+	"sum_product-inl.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\sum_product-inl.h
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\src\matrix.cpp
+	"matrix.h"
+	<cassert>
+	<cmath>
+	<cstring>
+	<iostream>
+	<iomanip>
+	<sstream>
+	<vector>
+	<algorithm>
+	"sum_product-inl.h"
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\src\now.cpp
+	"now.h"
+	<ctime>
+	<string>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\now.h
+	<string>
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\src\special_functions.cpp
+	"special_functions.h"
+	<cassert>
+	<cmath>
+	"numerical_constants.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\numerical_constants.h
+	<limits>
+
+1497018343 source:c:\users\randal\google drive\projects\aakozi\src\version.cpp
+	"version.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\version.h
+	<string>
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_aakozi_engine.cpp
+	"test_aakozi_engine.h"
+	<utility>
+	"unit_test.h"
+	"..\src\aakozi_engine.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\test\test_aakozi_engine.h
+	<utility>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\test\unit_test.h
+	"..\src\Matrix.h"
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.cpp
+	"test_linear_systems.h"
+	<utility>
+	"unit_test.h"
+	"..\src\linear_systems.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.h
+	<utility>
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_main.cpp
+	<iostream>
+	"test_matrix.h"
+	"test_linear_systems.h"
+	"test_aakozi_engine.h"
+	"test_special_functions.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\test\test_matrix.h
+	<utility>
+
+1497018290 c:\users\randal\google drive\projects\aakozi\test\test_special_functions.h
+	<utility>
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_matrix.cpp
+	"test_matrix.h"
+	<utility>
+	<iomanip>
+	"unit_test.h"
+	"..\src\matrix.h"
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_special_functions.cpp
+	"test_special_functions.h"
+	<cassert>
+	<cmath>
+	"unit_test.h"
+	"..\src\special_functions.h"
+
+1497018290 source:c:\users\randal\google drive\projects\aakozi\test\unit_test.cpp
+	<iostream>
+	"..\src\matrix.h"
+
