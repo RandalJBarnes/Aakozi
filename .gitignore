@@ -1,5 +1,8 @@
 bin/
 obj/
+data/
+doc/
+notes/
 
 # MikTeX/LaTeX intermediate files
 *.aux
