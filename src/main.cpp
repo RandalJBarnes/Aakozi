@@ -28,19 +28,38 @@
 //-----------------------------------------------------------------------------
 //
 //-----------------------------------------------------------------------------
+void Usage()
+{
+   std::cerr << std::endl;
+   std::cerr << "Aakozi (" << Version() << ')'      << std::endl;
+   std::cerr << "Usage: Aakozi <data filename> <buffer radius>" << std::endl;
+   std::cerr << std::endl;
+}
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void Banner( std::ostream& ost)
+{
+   ost << "================================================="  << std::endl;
+   ost << "Aakozi                       (" << Version() << ')' << std::endl;
+   ost << "================================================="  << std::endl;
+}
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {
    // Check the command line.
    if( argc != 3 )
    {
-      std::cerr << std::endl;
-      std::cerr << "Aakozi (" << Version() << ')'      << std::endl;
-      std::cerr << "Usage: Aakozi <data file> <alpha>" << std::endl;
-      std::cerr << std::endl;
+      Usage();
       return 1;
    }
 
-   // Create a log filename using the system time for uniqueness.
+   // Create a unique log filename using the system time.
    time_t now = time(0);
    struct tm t;
    localtime_s( &t, &now );
@@ -53,64 +72,42 @@ int main(int argc, char* argv[])
    std::ofstream logfile( logfilename );
    if( logfile.fail() )
    {
-      std::cerr << std::endl;
-      std::cerr << "Aakozi (" << Version() << ')'      << std::endl;
-      std::cerr << "Usage: Aakozi <data file> <alpha>" << std::endl;
-      std::cerr << "ERROR: could not open the log file <" << logfilename << "> for output." << std::endl;
-      std::cerr << std::endl;
+      std::cerr << "ERROR: could not open the log file <" << logfilename << "> for output.\n" << std::endl;
+      Usage();
       return 1;
    }
+
+   // Put the detailed header information out to the screen and to the logfile.
+   Banner( std::cout );
+   Banner( logfile );
 
    // Open the specified data file.
    std::ifstream datfile( argv[1] );
    if( datfile.fail() )
    {
-      std::cerr << std::endl;
-      std::cerr << "Aakozi (" << Version() << ')'      << std::endl;
-      std::cerr << "Usage: Aakozi <data file> <alpha>" << std::endl;
-      std::cerr << "ERROR: could not open the specified data file <" << argv[2] << "> for input." << std::endl;
-      std::cerr << std::endl;
-
+      std::cerr << "ERROR: could not open the specified data file <" << argv[1] << "> for input." << std::endl;
+      Usage();
       logfile.close();
       return 2;
    }
 
-   // Get alpha
-   double alpha = atof( argv[2] );
-   if( alpha <= 0.0 || alpha >= 1.0 )
+   // Get buffer radius.
+   double radius = atof( argv[2] );
+   if( radius <= 0.0 )
    {
+      std::cerr << "ERROR: buffer radius = " << argv[2] << " is not valid;  0 < radius." << std::endl;
       std::cerr << std::endl;
-      std::cerr << "Aakozi (" << Version() << ')'      << std::endl;
-      std::cerr << "Usage: Aakozi <data file> <alpha>" << std::endl;
-      std::cerr << "ERROR: alpha = " << argv[3] << " is not valid;  0 < alpha < 1." << std::endl;
-      std::cerr << std::endl;
+      Usage();
 
       logfile.close();
       datfile.close();
       return 3;
    }
 
-   // Put the detailed header information out to the cout stream.
-   std::cout << "=================================================" << std::endl;
-   std::cout << "Aakozi (" << Version() << ')'                      << std::endl;
-   std::cout                                                        << std::endl;
-   std::cout << "R. Barnes, University of Minnesota               " << std::endl;
-   std::cout << "R. Soule,  Minnesota Department of Health        " << std::endl;
-   std::cout << "=================================================" << std::endl;
-
-   // Echo the detailed header information out to the log file.
-   logfile   << "=================================================" << std::endl;
-   logfile   << "Aakozi (" << Version() << ')'                      << std::endl;
-   logfile                                                          << std::endl;
-   logfile   << "R. Barnes, University of Minnesota               " << std::endl;
-   logfile   << "R. Soule,  Minnesota Department of Health        " << std::endl;
-   logfile   << "=================================================" << std::endl;
-
    // Put the run information out to the log file.
-   logfile << std::endl;
-   logfile << "Run Date:  " << Now()                              << std::endl;
-   logfile << "Data file: " << argv[1]                            << std::endl;
-   logfile << "alpha:     " << alpha                              << std::endl;
+   logfile << "Run Date:   " << Now()   << std::endl;
+   logfile << "Input file: " << argv[1] << std::endl;
+   logfile << "Radius:     " << radius  << std::endl;
 
    // Read in the observation data from the specified datfile.
    std::vector<double> x;
@@ -130,12 +127,12 @@ int main(int argc, char* argv[])
    while( std::getline(datfile, line) )
    {
       std::istringstream is(line);
-      if( is >> xx >> yy >> zz >> id )
+      if( is >> id >> xx >> yy >> zz )
       {
+         uid.push_back(id);
          x.push_back(xx);
          y.push_back(yy);
          z.push_back(zz);
-         uid.push_back(id);
       }
 
       logfile << std::setw(5) << x.size();
@@ -152,6 +149,8 @@ int main(int argc, char* argv[])
    std::cout << std::endl << x.size() << " data read from <" << argv[1] << ">. \n";
    logfile   << std::endl << x.size() << " data read from <" << argv[1] << ">. \n";
 
+
+/*
    // Identify and report the outliers.
    try
    {
@@ -255,6 +254,8 @@ int main(int argc, char* argv[])
       logfile.close();
       throw;
    }
+
+*/
 
    // Close the log file.
    logfile.close();

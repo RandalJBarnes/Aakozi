@@ -172,6 +172,9 @@ Matrix::Matrix( int nrows, int ncols, const double* data )
 //    Any token that cannot be interpreted as a valid double is set to zero.
 //-----------------------------------------------------------------------------
 Matrix::Matrix( const std::string& str )
+:  m_nRows( 0 ),
+   m_nCols( 0 ),
+   m_Data( nullptr )
 {
    assert( str.find_first_not_of("-0123456789eE.,; \t") == std::string::npos );
 

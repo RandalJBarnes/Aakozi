@@ -29,7 +29,7 @@
 
 1497018290 c:\users\randal\google drive\projects\aakozi\src\sum_product-inl.h
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\src\matrix.cpp
+1497042293 source:c:\users\randal\google drive\projects\aakozi\src\matrix.cpp
 	"matrix.h"
 	<cassert>
 	<cmath>
@@ -58,7 +58,7 @@
 1497018290 c:\users\randal\google drive\projects\aakozi\src\numerical_constants.h
 	<limits>
 
-1497018343 source:c:\users\randal\google drive\projects\aakozi\src\version.cpp
+1497040574 source:c:\users\randal\google drive\projects\aakozi\src\version.cpp
 	"version.h"
 
 1497018290 c:\users\randal\google drive\projects\aakozi\src\version.h
@@ -115,4 +115,18 @@
 1497018290 source:c:\users\randal\google drive\projects\aakozi\test\unit_test.cpp
 	<iostream>
 	"..\src\matrix.h"
+
+1497043015 source:c:\users\randal\google drive\projects\aakozi\src\main.cpp
+	<vector>
+	<set>
+	<ctime>
+	<fstream>
+	<iostream>
+	<sstream>
+	<iomanip>
+	<string>
+	<time.h>
+	"aakozi_engine.h"
+	"version.h"
+	"now.h"
 

@@ -4,6 +4,8 @@ data/
 doc/
 notes/
 
+*.log
+
 # MikTeX/LaTeX intermediate files
 *.aux
 *.bbl

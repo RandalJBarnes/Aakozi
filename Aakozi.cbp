@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters=".\data\TestData.txt 0.5" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-pedantic" />
