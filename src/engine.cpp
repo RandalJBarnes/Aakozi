@@ -12,7 +12,7 @@
 // version:
 //    09 June 2017
 //=============================================================================
-#include "aakozi_engine.h"
+#include "engine.h"
 #include "special_functions.h"
 #include "matrix.h"
 #include "linear_systems.h"
@@ -25,7 +25,7 @@
 //=============================================================================
 //
 //=============================================================================
-std::vector<Boomerang> Aakozi_Engine( const std::vector<double>x, const std::vector<double>y, const std::vector<double>z, double buffer_radius )
+std::vector<Boomerang> Engine( const std::vector<double>x, const std::vector<double>y, const std::vector<double>z, double buffer_radius )
 {
    // Manifest constants.
    const int MINIMUM_COUNT = 10;

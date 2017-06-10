@@ -1,5 +1,5 @@
 //=============================================================================
-// test_aakozi_engine.h
+// test_engine.h
 //
 // author:
 //    Dr. Randal J. Barnes
@@ -9,13 +9,13 @@
 // version:
 //    09 June 2017
 //=============================================================================
-#ifndef TEST_AAKOZI_ENGINE_H
-#define TEST_AAKOZI_ENGINE_H
+#ifndef TEST_ENGINE_H
+#define TEST_ENGINE_H
 
 #include <utility>
 
 //-----------------------------------------------------------------------------
-std::pair<int,int> test_AakoziEngine();
+std::pair<int,int> test_Engine();
 
 //=============================================================================
-#endif  // TEST_AAKOZI_ENGINE_H
+#endif  // TEST_ENGINE_H

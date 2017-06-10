@@ -116,7 +116,7 @@
 	<iostream>
 	"..\src\matrix.h"
 
-1497043015 source:c:\users\randal\google drive\projects\aakozi\src\main.cpp
+1497064068 source:c:\users\randal\google drive\projects\aakozi\src\main.cpp
 	<vector>
 	<set>
 	<ctime>
@@ -126,7 +126,19 @@
 	<iomanip>
 	<string>
 	<time.h>
-	"aakozi_engine.h"
+	"engine.h"
 	"version.h"
 	"now.h"
+
+1497018290 c:\users\randal\google drive\projects\aakozi\src\engine.h
+	<vector>
+
+1497064195 source:c:\users\randal\google drive\projects\aakozi\src\engine.cpp
+	"engine.h"
+	"special_functions.h"
+	"matrix.h"
+	"linear_systems.h"
+	<numeric>
+	<math.h>
+	<iomanip>
 

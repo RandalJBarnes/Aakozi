@@ -1,5 +1,5 @@
 //=============================================================================
-// test_aakozi_engine.cpp
+// test_engine.cpp
 //
 // author:
 //    Dr. Randal J. Barnes
@@ -9,42 +9,42 @@
 // version:
 //    09 June 2017
 //=============================================================================
-#include "test_aakozi_engine.h"
+#include "test_engine.h"
 
 #include <utility>
 #include "unit_test.h"
-#include "..\src\aakozi_engine.h"
+#include "..\src\engine.h"
 
 namespace{
    const double TOLERANCE = 1e-9;
 }
 
-bool TestAakoziEngine();
+bool TestEngine();
 
 
 //=============================================================================
-// Test aakozi_engine
+// TestEngine
 //
 //    This is simply an example problem.  The "correct" solution was computed
 //    using the Matlab version of aakozi.
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-// test_AakoziEngine
+// test_Engine
 //-----------------------------------------------------------------------------
-std::pair<int,int> test_AakoziEngine()
+std::pair<int,int> test_Engine()
 {
    int nsucc = 0;
    int nfail = 0;
 
-   ( TestAakoziEngine() ? ++nsucc : ++nfail );
+   ( TestEngine() ? ++nsucc : ++nfail );
 
    return std::make_pair( nsucc, nfail );
 }
 
 
 //-----------------------------------------------------------------------------
-bool TestAakoziEngine()
+bool TestEngine()
 {
    static const double x_data[] = {
         0.00,         0.00,         0.00,         0.00,         0.00,        33.33,        33.33,        33.33,        66.67,        66.67,
