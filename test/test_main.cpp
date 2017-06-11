@@ -7,13 +7,13 @@
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #include <iostream>
 
-#include "test_matrix.h"
-#include "test_linear_systems.h"
 #include "test_engine.h"
+#include "test_linear_systems.h"
+#include "test_matrix.h"
 #include "test_special_functions.h"
 
 //-----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ int main()
 
    std::pair<int,int> counts;
 
-   counts = test_Matrix();
+   counts = test_Engine();
    nsucc += counts.first;
    nfail += counts.second;
 
@@ -34,7 +34,7 @@ int main()
    nsucc += counts.first;
    nfail += counts.second;
 
-   counts = test_Engine();
+   counts = test_Matrix();
    nsucc += counts.first;
    nfail += counts.second;
 
@@ -44,10 +44,10 @@ int main()
 
    if(nfail > 0)
    {
-      std::cerr << "nsucc = " << nsucc << '\t' << "nfail = " << nfail << std::endl;
+      std::cerr << "AAKOZI TESTS: nsucc = " << nsucc << '\t' << "nfail = " << nfail << std::endl;
    }
    else
    {
-      std::cerr << "All tests passed." << std::endl;
+      std::cerr << "AAKOZI TESTS: All " << nsucc << " tests passed." << std::endl;
    }
 }

@@ -1,8 +1,9 @@
 //=============================================================================
 // matrix.cpp
 //
-//    A minimal matrix class with basic operations and arithmetic.  This
-//    is based on <double>, and is not templated.
+//    A minimal matrix class with some basic operations and arithmetic.  This
+//    matrix class is explicitly based on <double>. This matrix class is NOT
+//    a template.
 //
 // author:
 //    Dr. Randal J. Barnes
@@ -10,7 +11,7 @@
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #include "matrix.h"
 
@@ -22,6 +23,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 #include "sum_product-inl.h"
 
@@ -53,52 +55,6 @@ Matrix::Matrix( const Matrix& A )
       m_nCols = A.nCols();
       m_Data  = new double[ m_nRows*m_nCols ];
       memcpy( m_Data, A.Base(), sizeof(double)*m_nRows*m_nCols );
-   }
-}
-
-//-----------------------------------------------------------------------------
-// Slice constructor.
-//
-//    The new matrix is A with the rows and columns deleted as indicated by
-//    zeros in the row_flag and col_flag vectors.
-//-----------------------------------------------------------------------------
-Matrix::Matrix( const Matrix& A, const std::vector<int>& row_flag, const std::vector<int>& col_flag )
-:  m_nRows( 0 ),
-   m_nCols( 0 ),
-   m_Data( nullptr )
-{
-   assert( row_flag.size() == unsigned(A.nRows()) );
-   assert( col_flag.size() == unsigned(A.nCols()) );
-
-   m_nRows = std::count_if( row_flag.begin(), row_flag.end(), [](int i){return i != 0;} );
-   m_nCols = std::count_if( col_flag.begin(), col_flag.end(), [](int i){return i != 0;} );
-
-   if( m_nRows*m_nCols > 0 )
-   {
-      m_Data  = new double[ m_nRows*m_nCols ];
-
-      int row = 0;
-      for( int i=0; i<A.nRows(); ++i )
-      {
-         if( row_flag[i] != 0 )
-         {
-            int col = 0;
-            for( int j=0; j<A.nCols(); ++j )
-            {
-               if( col_flag[j] != 0 )
-               {
-                  m_Data[ row*m_nCols + col ] = A(i,j);
-                  ++col;
-               }
-            }
-            ++row;
-         }
-      }
-   }
-   else
-   {
-      m_nRows = 0;
-      m_nCols = 0;
    }
 }
 
@@ -156,7 +112,7 @@ Matrix::Matrix( int nrows, int ncols, const double* data )
 //-----------------------------------------------------------------------------
 // Constructor with string-based initialization.
 //
-//    Columns are spearated by comma, rows are separated by semicolons.
+//    Columns are separated by comma, rows are separated by semicolons.
 //    Missing values are filled with zeros.  For example,
 //
 //       Matrix A("1,2,3;4,5,6")
@@ -378,6 +334,32 @@ double* Matrix::Base( int row, int col )
    return m_Data + row*m_nCols + col;
 }
 
+//-----------------------------------------------------------------------------
+// Read only STL-conforming begin() iterators.
+//-----------------------------------------------------------------------------
+const double* Matrix::begin() const
+{
+   return m_Data;
+}
+
+const double* Matrix::end() const
+{
+   return m_Data + m_nRows*m_nCols;
+}
+
+//-----------------------------------------------------------------------------
+// Read/write STL-conforming end() iterator.
+//-----------------------------------------------------------------------------
+double* Matrix::begin()
+{
+   return m_Data;
+}
+
+double* Matrix::end()
+{
+   return m_Data + m_nRows*m_nCols;
+}
+
 
 //=============================================================================
 // I/O routines.
@@ -446,6 +428,14 @@ void RowSum( const Matrix& A, Matrix& x )
 }
 
 //-----------------------------------------------------------------------------
+// Matrix Length = max( nRows, nCols )
+//-----------------------------------------------------------------------------
+int Length( const Matrix& A )
+{
+   return std::max( A.nRows(), A.nCols() );
+}
+
+//-----------------------------------------------------------------------------
 // Matrix Trace.
 //
 //    The trace of a square Matrix is the sum of the diagonal elements.
@@ -476,14 +466,24 @@ double Trace( const Matrix& A )
 //-----------------------------------------------------------------------------
 double Sum( const Matrix& A )
 {
-   double Sum  = 0.0;
-   for( int i=0; i<A.nRows(); ++i )
-      for( int j=0; j<A.nCols(); ++j )
-         Sum += A(i,j);
+   // Check the arguments.
+   assert( A.nRows() > 0 && A.nCols() > 0 );
 
-   return Sum;
+   return std::accumulate( A.begin(), A.end(), 0.0 );
 }
 
+//-----------------------------------------------------------------------------
+// Matrix SumAbs.
+//
+//    Sum the absolute values all of the elements in the matrix.
+//-----------------------------------------------------------------------------
+double SumAbs( const Matrix& A )
+{
+   // Check the arguments.
+   assert( A.nRows() > 0 && A.nCols() > 0 );
+
+   return std::accumulate( A.begin(), A.end(), 0.0, [](double a, double b){return a + abs(b);} );
+}
 
 //-----------------------------------------------------------------------------
 // Matrix MaxAbs.
@@ -496,18 +496,7 @@ double MaxAbs( const Matrix& A )
    // Check the arguments.
    assert( A.nRows() > 0 && A.nCols() > 0 );
 
-   // Compute the L1 norm.
-   double max_abs = 0;
-
-   for (int j=0; j<A.nCols(); ++j)
-   {
-      for (int i=0; i<A.nRows(); ++i)
-      {
-         if (fabs( A(i,j) ) > max_abs) max_abs = fabs( A(i,j) );
-      }
-   }
-
-   return max_abs;
+   return std::accumulate( A.begin(), A.end(), 0.0, [](double a, double b){return std::max(a, abs(b));} );
 }
 
 //-----------------------------------------------------------------------------
@@ -581,17 +570,7 @@ double FNorm( const Matrix& A )
    // Check the arguments.
    assert( A.nRows() > 0 && A.nCols() > 0 );
 
-   // Compute the LInf norm.
-   double Sum = 0;
-   for (int i=0; i<A.nRows(); ++i)
-   {
-      for (int j=0; j<A.nCols(); ++j)
-      {
-         Sum += A(i,j)*A(i,j);
-      }
-   }
-
-   return sqrt( Sum );
+   return sqrt( std::accumulate(A.begin(), A.end(), 0.0, [](double a, double b){return a + b*b;}) );
 }
 
 
@@ -630,16 +609,8 @@ void Negative( const Matrix& A, Matrix& C )
    // Check the arguments.
    assert( A.nCols() > 0 && A.nRows() > 0 );
 
-   // Term-by-term negation.
-   C = A;
-
-   for (int i=0; i<C.nRows(); ++i)
-   {
-      for (int j=0; j<C.nCols(); ++j)
-      {
-         C(i,j) = -C(i,j);
-      }
-   }
+   C.Resize( A.nRows(), A.nCols() );
+   std::transform( A.begin(), A.end(), C.begin(), [](double a){return -(a);});
 }
 
 //-----------------------------------------------------------------------------
@@ -656,6 +627,41 @@ void Identity( Matrix& A, int n )
       A(i,i) = 1;
    }
 }
+
+//-----------------------------------------------------------------------------
+// Slice Matrix operations.
+//-----------------------------------------------------------------------------
+void Slice( const Matrix& A, const std::vector<int>& row_flag, const std::vector<int>& col_flag, Matrix& C )
+{
+   assert( int(row_flag.size()) == A.nRows() );
+   assert( int(col_flag.size()) == A.nCols() );
+
+   int nRows = std::count_if( row_flag.begin(), row_flag.end(), [](int i){return i != 0;} );
+   int nCols = std::count_if( col_flag.begin(), col_flag.end(), [](int i){return i != 0;} );
+   C.Resize( nRows, nCols );
+
+   if( nRows*nCols > 0 )
+   {
+      int row = 0;
+      for( int i=0; i<A.nRows(); ++i )
+      {
+         if( row_flag[i] != 0 )
+         {
+            int col = 0;
+            for( int j=0; j<A.nCols(); ++j )
+            {
+               if( col_flag[j] != 0 )
+               {
+                  C(row, col) = A(i,j);
+                  ++col;
+               }
+            }
+            ++row;
+         }
+      }
+   }
+}
+
 
 //=============================================================================
 // scalar/Matrix arithmetic routines.
@@ -678,6 +684,28 @@ void Add_aM( double a, const Matrix& A, Matrix& C )
       for (int j=0; j<C.nCols(); ++j)
       {
          (*p) = a+(*p);
+         ++p;
+      }
+   }
+}
+
+//-----------------------------------------------------------------------------
+// scalar/Matrix subtraction:  C = a-A (term-by-term)
+//-----------------------------------------------------------------------------
+void Subtract_aM( double a, const Matrix& A, Matrix& C )
+{
+   // Check the arguments.
+   assert( A.nRows() > 0 && A.nCols() > 0 );
+
+   // Do the update:  C = aA
+   C = A;
+   double* p = C.Base();
+
+   for (int i=0; i<C.nRows(); ++i)
+   {
+      for (int j=0; j<C.nCols(); ++j)
+      {
+         (*p) = a-(*p);
          ++p;
       }
    }
@@ -870,6 +898,18 @@ void Multiply_MtMt( const Matrix& A, const Matrix& B, Matrix& C )
 }
 
 //-----------------------------------------------------------------------------
+// Dot product = A'B
+//-----------------------------------------------------------------------------
+double DotProduct( const Matrix& A, const Matrix& B )
+{
+   // Check the arguments.
+   assert( isVector(A) && isVector(B) );
+   assert( Length(A) == Length(B) );
+
+   return SumProduct( Length(A), A.Base(), B.Base() );
+}
+
+//-----------------------------------------------------------------------------
 // Quadratic form = a' B c
 //-----------------------------------------------------------------------------
 double QuadraticForm_MtMM( const Matrix& a, const Matrix& B, const Matrix& c )
@@ -914,29 +954,52 @@ double QuadraticForm_MMM( const Matrix& a, const Matrix& B, const Matrix& c )
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-bool Equal( const Matrix& A, const Matrix& B )
+bool isCongruent( const Matrix& A, const Matrix& B )
 {
-   // Compare the sizes first.
-   if (A.nRows() != B.nRows() || A.nCols() != B.nCols())
+   // Compare the sizes
+   if (A.nRows() == B.nRows() && A.nCols() == B.nCols())
+      return true;
+   else
       return false;
-
-   // Compare the contents.
-   Matrix C;
-
-   Subtract_MM( A, B, C );
-   return (MaxAbs(C) != 0.0);
 }
 
 //-----------------------------------------------------------------------------
-bool Equal( const Matrix& A, const Matrix& B, double tol )
+bool isClose( const Matrix& A, const Matrix& B, double tol )
 {
    // Compare the sizes first.
    if (A.nRows() != B.nRows() || A.nCols() != B.nCols())
       return false;
 
    // Compare the contents.
-   Matrix C;
+   const double* p = A.Base();
+   const double* q = B.Base();
+   int n = A.nRows() * A.nCols();
 
-   Subtract_MM( A, B, C );
-   return (MaxAbs(C) <= tol);
+   for( int k = 0; k<n; k++ )
+   {
+      if( abs((*p++) - (*q++)) > tol ) return false;
+   }
+   return true;
+}
+
+//=============================================================================
+// isRow/Col/Vector
+//=============================================================================
+
+//-----------------------------------------------------------------------------
+bool isRow( const Matrix& A )
+{
+   return A.nRows() == 1 && A.nCols() > 0;
+}
+
+//-----------------------------------------------------------------------------
+bool isCol( const Matrix& A )
+{
+   return A.nCols() == 1 && A.nRows() > 0;
+}
+
+//-----------------------------------------------------------------------------
+bool isVector( const Matrix& A )
+{
+   return isRow(A) || isCol(A);
 }

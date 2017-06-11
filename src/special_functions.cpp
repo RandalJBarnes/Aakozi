@@ -13,7 +13,7 @@
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #include "special_functions.h"
 

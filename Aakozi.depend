@@ -11,25 +11,25 @@
 1497018290 c:\users\randal\google drive\projects\aakozi\src\aakozi_engine.h
 	<vector>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\special_functions.h
+1497201284 c:\users\randal\google drive\projects\aakozi\src\special_functions.h
 	<iostream>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\matrix.h
+1497203059 c:\users\randal\google drive\projects\aakozi\src\matrix.h
 	<iostream>
 	<vector>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\linear_systems.h
+1497201283 c:\users\randal\google drive\projects\aakozi\src\linear_systems.h
 	"matrix.h"
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\src\linear_systems.cpp
+1497201283 source:c:\users\randal\google drive\projects\aakozi\src\linear_systems.cpp
 	"linear_systems.h"
 	<cassert>
 	<cmath>
 	"sum_product-inl.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\sum_product-inl.h
+1497201284 c:\users\randal\google drive\projects\aakozi\src\sum_product-inl.h
 
-1497042293 source:c:\users\randal\google drive\projects\aakozi\src\matrix.cpp
+1497206702 source:c:\users\randal\google drive\projects\aakozi\src\matrix.cpp
 	"matrix.h"
 	<cassert>
 	<cmath>
@@ -39,29 +39,30 @@
 	<sstream>
 	<vector>
 	<algorithm>
+	<numeric>
 	"sum_product-inl.h"
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\src\now.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\src\now.cpp
 	"now.h"
 	<ctime>
 	<string>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\now.h
+1497201283 c:\users\randal\google drive\projects\aakozi\src\now.h
 	<string>
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\src\special_functions.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\src\special_functions.cpp
 	"special_functions.h"
 	<cassert>
 	<cmath>
 	"numerical_constants.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\numerical_constants.h
+1497201284 c:\users\randal\google drive\projects\aakozi\src\numerical_constants.h
 	<limits>
 
-1497040574 source:c:\users\randal\google drive\projects\aakozi\src\version.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\src\version.cpp
 	"version.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\version.h
+1497201284 c:\users\randal\google drive\projects\aakozi\src\version.h
 	<string>
 
 1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_aakozi_engine.cpp
@@ -73,50 +74,48 @@
 1497018290 c:\users\randal\google drive\projects\aakozi\test\test_aakozi_engine.h
 	<utility>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\test\unit_test.h
-	"..\src\Matrix.h"
+1497201283 c:\users\randal\google drive\projects\aakozi\test\unit_test.h
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.cpp
 	"test_linear_systems.h"
 	<utility>
 	"unit_test.h"
 	"..\src\linear_systems.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.h
+1497201284 c:\users\randal\google drive\projects\aakozi\test\test_linear_systems.h
 	<utility>
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_main.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\test\test_main.cpp
 	<iostream>
-	"test_matrix.h"
+	"test_engine.h"
 	"test_linear_systems.h"
-	"test_aakozi_engine.h"
+	"test_matrix.h"
 	"test_special_functions.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\test\test_matrix.h
+1497201284 c:\users\randal\google drive\projects\aakozi\test\test_matrix.h
 	<utility>
 
-1497018290 c:\users\randal\google drive\projects\aakozi\test\test_special_functions.h
+1497201283 c:\users\randal\google drive\projects\aakozi\test\test_special_functions.h
 	<utility>
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_matrix.cpp
+1497201284 source:c:\users\randal\google drive\projects\aakozi\test\test_matrix.cpp
 	"test_matrix.h"
 	<utility>
 	<iomanip>
 	"unit_test.h"
 	"..\src\matrix.h"
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\test\test_special_functions.cpp
+1497201283 source:c:\users\randal\google drive\projects\aakozi\test\test_special_functions.cpp
 	"test_special_functions.h"
 	<cassert>
 	<cmath>
 	"unit_test.h"
 	"..\src\special_functions.h"
 
-1497018290 source:c:\users\randal\google drive\projects\aakozi\test\unit_test.cpp
+1497201283 source:c:\users\randal\google drive\projects\aakozi\test\unit_test.cpp
 	<iostream>
-	"..\src\matrix.h"
 
-1497064068 source:c:\users\randal\google drive\projects\aakozi\src\main.cpp
+1497207782 source:c:\users\randal\google drive\projects\aakozi\src\main.cpp
 	<vector>
 	<set>
 	<ctime>
@@ -130,10 +129,10 @@
 	"version.h"
 	"now.h"
 
-1497018290 c:\users\randal\google drive\projects\aakozi\src\engine.h
+1497201284 c:\users\randal\google drive\projects\aakozi\src\engine.h
 	<vector>
 
-1497064195 source:c:\users\randal\google drive\projects\aakozi\src\engine.cpp
+1497209648 source:c:\users\randal\google drive\projects\aakozi\src\engine.cpp
 	"engine.h"
 	"special_functions.h"
 	"matrix.h"
@@ -141,4 +140,14 @@
 	<numeric>
 	<math.h>
 	<iomanip>
+	<cassert>
+
+1497201284 source:c:\users\randal\google drive\projects\aakozi\test\test_engine.cpp
+	"test_engine.h"
+	<utility>
+	"unit_test.h"
+	"..\src\engine.h"
+
+1497201284 c:\users\randal\google drive\projects\aakozi\test\test_engine.h
+	<utility>
 

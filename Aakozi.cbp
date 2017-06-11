@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters=".\data\TestData.txt 0.5" />
+				<Option parameters=".\data\TestData.txt 50" />
 				<Compiler>
 					<Add option="-Weffc++" />
 					<Add option="-pedantic" />
@@ -44,10 +44,14 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-m64" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="src/aakozi_engine.cpp" />
-		<Unit filename="src/aakozi_engine.h" />
+		<Linker>
+			<Add option="-m64" />
+		</Linker>
+		<Unit filename="src/engine.cpp" />
+		<Unit filename="src/engine.h" />
 		<Unit filename="src/linear_systems.cpp" />
 		<Unit filename="src/linear_systems.h" />
 		<Unit filename="src/main.cpp">
@@ -64,10 +68,10 @@
 		<Unit filename="src/sum_product-inl.h" />
 		<Unit filename="src/version.cpp" />
 		<Unit filename="src/version.h" />
-		<Unit filename="test/test_aakozi_engine.cpp">
+		<Unit filename="test/test_engine.cpp">
 			<Option target="Test" />
 		</Unit>
-		<Unit filename="test/test_aakozi_engine.h">
+		<Unit filename="test/test_engine.h">
 			<Option target="Test" />
 		</Unit>
 		<Unit filename="test/test_linear_systems.cpp">

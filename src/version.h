@@ -7,7 +7,7 @@
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #ifndef VERSION_H
 #define VERSION_H

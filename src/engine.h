@@ -7,7 +7,7 @@
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #ifndef AAKOZI_ENGINE_H
 #define AAKOZI_ENGINE_H
@@ -22,11 +22,11 @@ struct Boomerang
    double   zhat;
    double   zeta;
    double   pvalue;
-   int      count;
+   int      cnt;
 };
 
 //=============================================================================
-std::vector<Boomerang> Aakozi_Engine( const std::vector<double>x, const std::vector<double>y, const std::vector<double>z, double radius );
+std::vector<Boomerang> Engine( const std::vector<double>x, const std::vector<double>y, const std::vector<double>z, double radius );
 
 
 //=============================================================================

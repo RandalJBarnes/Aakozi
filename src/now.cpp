@@ -3,13 +3,16 @@
 //
 //    Return the current time and date as a character string.
 //
+//    This is really silly that C++ does not offer such a function built-in
+//    to the standard library.
+//
 // author:
 //    Dr. Randal J. Barnes
 //    Department of Civil, Environmental, and Geo- Engineering
 //    University of Minnesota
 //
 // version:
-//    09 June 2017
+//    11 June 2017
 //=============================================================================
 #include "now.h"
 
